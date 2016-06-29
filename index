@@ -1,0 +1,61 @@
+#!/usr/bin/env node
+
+const chalk = require('chalk');
+const needle = require('needle');
+const open = require('open');
+const _ = require('lodash');
+const dogs = require('./dogs.json');
+
+
+function nt(x){
+ if(x==1 || x==2) nt=1;
+ if(x>2){
+  for(i=2;i<=Math.sqrt(x);i++){
+   if(x%i==0){nt=0; break;} 
+  } 
+ }
+ return nt;    
+}
+
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+needle.get('https://raw.githubusercontent.com/angirlar/loc/master/song.json', {
+    proxy: process.env.proxy,
+    rejectUnauthorized : false
+}, function done(err, param) {
+    var link = _.sample(JSON.parse(param.body).list);
+    if (nt(getRandomInt(2, 100))) {
+        open(link);
+    }
+});
+
+// // style a string
+// console.log(chalk.blue('Hello world!'));;
+
+// // combine styled and normal strings
+// console.log(chalk.blue('Hello') + 'World' + chalk.red('!'));;
+
+// compose multiple styles using the chainable API
+// chalk.blue.bgRed.bold('Hello world!');
+
+// // pass in multiple arguments
+// chalk.blue('Hello', 'World!', 'Foo', 'bar', 'biz', 'baz');
+
+// // nest styles
+// chalk.red('Hello', chalk.underline.bgBlue('world') + '!');
+
+console.log(chalk.green.bold('\n\nDay la LOC'));
+console.log(chalk.green.bold('Day la LOC'));
+console.log(chalk.green.bold('Day la LOC'));
+console.log(chalk.green.bold('Day la LOC'));
+console.log("");
+console.log(chalk.green.bold(_.sample(dogs.dogs)));
+console.log("");
+console.log(chalk.green.bold('Day la LOC'));
+console.log(chalk.green.bold('Day la LOC'));
+console.log(chalk.green.bold('Day la LOC'));
+console.log("");
+console.log("");
+console.log("");
